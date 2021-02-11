@@ -37,7 +37,9 @@ export default function Register() {
     else
       setWidgetState(widgetState + 1);
   }
-
+  const onClickSubmit = () => {
+    
+  }
   React.useEffect(() => {
   }, []);
 
@@ -70,8 +72,15 @@ export default function Register() {
                       <CreateAccount />
                     }
                     <div className="next-prev">
-                      <button type="button" id="prevBtn" onClick={onClickPrev}>Previous</button>
-                      <button type="button" id="nextBtn" onClick={onClickNext}>Next</button>
+                      {widgetState != 1 &&
+                        <button className="mr-2" type="button" id="prevBtn" onClick={onClickPrev}>Previous</button>
+                      }
+                      {widgetState != 3 &&
+                        <button type="button" id="nextBtn" onClick={onClickNext}>Next</button>
+                      }
+                      {widgetState == 3 &&
+                        <button type="button" id="nextBtn" onClick={onClickSubmit}>Submit</button>
+                      }
                     </div>
                   </form>
                 </div>

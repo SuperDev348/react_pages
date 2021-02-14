@@ -9,9 +9,9 @@ import Register from './containers/auth/register'
 
 export default function Routes() {
     return (
-        <Router>
+      <Router basename={"/build"}>
           <Switch>
-            <Route exact path="/register">
+            <Route path="/register">
               <Register/>
             </Route>
           </Switch>

@@ -18,7 +18,7 @@ export default function Header() {
                             <li><a href="#"> New Patient Registration</a></li>
                             <li><a href="#">Edit My Information</a></li>
                             <li className="login mobile"><a  href="#">Login</a></li>
-                            <li className="drop">
+                            <li className="drop">    
                             <select className="selectpicker" data-width="fit">
                                 <option data-content='<span className="flag-icon flag-icon-us"></span> English'>English</option>
                                 <option  data-content='<span className="flag-icon flag-icon-mx"></span> Español'>Español</option>

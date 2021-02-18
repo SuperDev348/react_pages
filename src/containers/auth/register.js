@@ -41,7 +41,7 @@ export default function Register() {
     
   }
   React.useEffect(() => {
-  }, []);    
+  }, []);
 
   return (
     <>

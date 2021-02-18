@@ -17,7 +17,7 @@ export default function PersonalDetail() {
   const [dateOfBirth, setDateOfBirth] = React.useState("");
 
   React.useEffect(() => {
-    console.log(gender);     
+    console.log(gender);
   }, [gender])
 
   return (

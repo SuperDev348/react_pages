@@ -13,7 +13,7 @@ export default function Routes() {
           <Switch>
             <Route path="/register">
               <Register/>
-            </Route>
+            </Route>    
           </Switch>
       </Router>
     );

@@ -23,7 +23,7 @@ export default function AddressProfile() {
             <div className="right-side adres-fild">
                 <label>Suburb</label>
                 <input type="text" placeholder="Enter Suburb" value={suburb} onChange={(event)=>setSuburb(event.target.value)}/>
-            </div>    
+            </div>
             <div className="left-side">
                 <label>Mobile Numbar</label>
                 <input type="text" placeholder="Enter Mobile Numbar" value={mobileNumber} onChange={(event)=>setMobileNumber(event.target.value)}/>

@@ -8,6 +8,6 @@ const App = () => (
   <Provider store={store}>
     <Routes /> 
   </Provider>
-);  
+);
 
 export default App;

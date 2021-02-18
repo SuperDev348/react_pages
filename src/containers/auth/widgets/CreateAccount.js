@@ -18,7 +18,7 @@ export default function CreateAccount() {
     }, [])
 
     return (
-        <div>
+        <div>   
             <h2 className="fs-title">Create your account</h2>
             <h3 className="fs-subtitle">Fill in your credentials</h3>
             <div className="row">

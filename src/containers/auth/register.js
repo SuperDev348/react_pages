@@ -25,6 +25,30 @@ export default function Register() {
   const dispatch = useDispatch();
   const states = [1, 2, 3];
   const [widgetState, setWidgetState] = React.useState(1);
+
+  const [gender, setGender] = React.useState("female");
+  const [fname, setFname] = React.useState("");
+  const [lname, setLname] = React.useState("");
+  const [preferredName, setPreferredName] = React.useState("");
+  const [title, setTitle] = React.useState("");
+  const [dateOfBirth, setDateOfBirth] = React.useState("");
+
+  const [streetAddress, setStreetAddress] = React.useState("");
+  const [suburb, setSuburb] = React.useState("");
+  const [mobileNumber, setMobileNumber] = React.useState("");
+  const [emailAddress, setEmailAddress] = React.useState("");
+
+  const [medicareNo, setMedicareNo] = React.useState("");
+  const [lineNo, setLineNo] = React.useState("");
+  const [validNo, setValidNo] = React.useState("");
+  const [healthCare, setHealthCare] = React.useState("");
+  const [validTo, setValidTo] = React.useState("");
+  const [emergencyContactName, setEmergencyContactName] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [aboriginal, setAboriginal] = React.useState(false);
+  const [torrensIslander, setTorrensIslander] = React.useState(false);
+  const [neither, setNeither] = React.useState(false);
+
   const onClickPrev = () => {
     if(widgetState == 1)
       setWidgetState(widgetState);
@@ -37,6 +61,32 @@ export default function Register() {
     else
       setWidgetState(widgetState + 1);
   }
+  const personalInfo = (info) => {
+    setGender(info.gender);
+    setFname(info.fname);
+    setLname(info.lname);
+    setPreferredName(info.preferredName);
+    setTitle(info.title);
+    setDateOfBirth(info.dateOfBirth);
+  };
+  const addressInfo = (info) => {
+    setStreetAddress(info.streetAddress);
+    setSuburb(info.suburb);
+    setMobileNumber(info.mobileNumber);
+    setEmailAddress(info.emailAddress);
+  };
+  const accountInfo = (info) => {
+    setMedicareNo(info.medicareNo);
+    setLineNo(info.lineNo);
+    setValidNo(info.validNo);
+    setHealthCare(info.healthCare);
+    setValidTo(info.validTo);
+    setEmergencyContactName(info.emergencyContactName);
+    setPhoneNumber(info.phoneNumber);
+    setAboriginal(info.aboriginal);
+    setTorrensIslander(info.torrensIslander);
+    setNeither(info.neither);
+  };
   const onClickSubmit = () => {
     
   }
@@ -63,13 +113,22 @@ export default function Register() {
                   </div>
                   <form id="regForm">
                     {widgetState == 1 &&
-                      <PersonalDetail />
+                      <PersonalDetail 
+                        changeInfo = {personalInfo}
+                        data = {{gender, fname, lname, preferredName, title, dateOfBirth}}
+                      />
                     }
                     {widgetState == 2 &&
-                      <AddressProfile />
+                      <AddressProfile 
+                        changeInfo = {addressInfo}
+                        data = {{streetAddress, suburb, mobileNumber, emailAddress}}
+                      />
                     }
                     {widgetState == 3 &&
-                      <CreateAccount />
+                      <CreateAccount 
+                        changeInfo = {accountInfo}
+                        data = {{medicareNo, lineNo, validNo, healthCare, validTo, emergencyContactName, phoneNumber, aboriginal, torrensIslander, neither}}
+                      />
                     }
                     <div className="next-prev">
                       {widgetState != 1 &&

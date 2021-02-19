@@ -2,7 +2,9 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch,useHistory } from "react-router-dom";
 
-export default function CreateAccount() {
+export default function CreateAccount(props) {
+    const {data} = props;
+
     const [medicareNo, setMedicareNo] = React.useState("");
     const [lineNo, setLineNo] = React.useState("");
     const [validNo, setValidNo] = React.useState("");
@@ -13,8 +15,35 @@ export default function CreateAccount() {
     const [aboriginal, setAboriginal] = React.useState(false);
     const [torrensIslander, setTorrensIslander] = React.useState(false);
     const [neither, setNeither] = React.useState(false);
-
+    const changeInfo = () => {
+        var info = {};
+        info.medicareNo = medicareNo;
+        info.lineNo = lineNo;
+        info.validNo = validNo;
+        info.healthCare = healthCare;
+        info.validTo = validTo;
+        info.emergencyContactName = emergencyContactName;
+        info.phoneNumber = phoneNumber;
+        info.aboriginal = aboriginal;
+        info.torrensIslander = torrensIslander;
+        info.neither = neither;
+        props.changeInfo(info);
+      };
+  
     React.useEffect(() => {
+        changeInfo();
+    }, [medicareNo, lineNo, validNo, healthCare, validTo, emergencyContactName, phoneNumber, aboriginal, torrensIslander, neither])
+    React.useEffect(() => {
+        setMedicareNo(data.medicareNo);
+        setLineNo(data.lineNo);
+        setValidNo(data.validNo);
+        setHealthCare(data.healthCare);
+        setValidTo(data.validTo);
+        setEmergencyContactName(data.emergencyContactName);
+        setPhoneNumber(data.phoneNumber);
+        setAboriginal(data.aboriginal);
+        setTorrensIslander(data.torrensIslander);
+        setNeither(data.neither);
     }, [])
 
     return (

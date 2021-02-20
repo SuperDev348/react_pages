@@ -2,8 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch,useHistory } from "react-router-dom";
 
+import Input from "../../../components/input"
+
 export default function AddressProfile(props) {
-  const {data} = props;
+  const {data, errors} = props;
   
   const [streetAddress, setStreetAddress] = React.useState("");
   const [suburb, setSuburb] = React.useState("");
@@ -34,19 +36,51 @@ export default function AddressProfile(props) {
       <h3 className="fs-subtitle">Your presence on the Address</h3>
       <div className="left-side adres-fild">
         <label>Street Address</label>
-        <input type="text" placeholder="Enter Street Address" value={streetAddress} onChange={(event)=>setStreetAddress(event.target.value)}/>
+        <Input 
+          type={"text"} 
+          name={"streetAddress"} 
+          placeholder={"Enter Street Address"} 
+          value={streetAddress}
+          onChange={ (event) => setStreetAddress(event.target.value)}
+          error = {errors.streetAddress}
+        />
+        {/* <input type="text" placeholder="Enter Street Address" value={streetAddress} onChange={(event)=>setStreetAddress(event.target.value)}/> */}
       </div>
       <div className="right-side adres-fild">
         <label>Suburb</label>
-        <input type="text" placeholder="Enter Suburb" value={suburb} onChange={(event)=>setSuburb(event.target.value)}/>
+        <Input 
+          type={"text"} 
+          name={"suburb"} 
+          placeholder={"Enter Suburb"} 
+          value={suburb}
+          onChange={ (event) => setSuburb(event.target.value)}
+          error = {errors.suburb}
+        />
+        {/* <input type="text" placeholder="Enter Suburb" value={suburb} onChange={(event)=>setSuburb(event.target.value)}/> */}
       </div>
       <div className="left-side">
         <label>Mobile Numbar</label>
-        <input type="text" placeholder="Enter Mobile Numbar" value={mobileNumber} onChange={(event)=>setMobileNumber(event.target.value)}/>
+        <Input 
+          type={"text"} 
+          name={"mobileNumber"} 
+          placeholder={"Enter Mobile Number"} 
+          value={mobileNumber}
+          onChange={ (event) => setMobileNumber(event.target.value)}
+          error = {errors.mobileNumber}
+        />
+        {/* <input type="text" placeholder="Enter Mobile Numbar" value={mobileNumber} onChange={(event)=>setMobileNumber(event.target.value)}/> */}
       </div>
       <div className="right-side">
         <label>Email Address</label>
-        <input type="text" placeholder="Enter Email Address" value={emailAddress} onChange={(event)=>setEmailAddress(event.target.value)}/>
+        <Input 
+          type={"text"} 
+          name={"emailAddress"} 
+          placeholder={"Enter Email Address"} 
+          value={emailAddress}
+          onChange={ (event) => setEmailAddress(event.target.value)}
+          error = {errors.emailAddress}
+        />
+        {/* <input type="text" placeholder="Enter Email Address" value={emailAddress} onChange={(event)=>setEmailAddress(event.target.value)}/> */}
       </div>
     </div>
   );

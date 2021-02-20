@@ -1,11 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch,useHistory } from "react-router-dom";
-// import ApiService from "../api/api.service";
+
+import { NotificationManager } from "react-notifications";
+
 import Header from "../layout/header";
 import PersonalDetail from "./widgets/PersonalDetail";
 import AddressProfile from "./widgets/AddressProfile";
 import CreateAccount from "./widgets/CreateAccount";
+import ApiService from "../../api/api.service";
+import "./widgets/style.css";
  
 // const widgetStyle = {
 //     width: "350px",
@@ -25,6 +29,7 @@ export default function Register() {
   const dispatch = useDispatch();
   const states = [1, 2, 3];
   const [widgetState, setWidgetState] = React.useState(1);
+  const [errors, setErrors] = React.useState({});
 
   const [gender, setGender] = React.useState("female");
   const [fname, setFname] = React.useState("");
@@ -87,11 +92,108 @@ export default function Register() {
     setTorrensIslander(info.torrensIslander);
     setNeither(info.neither);
   };
+  const checkValidate = (value, property = []) => {
+    let message= "";
+    let isError = false;
+    if(value == "") {
+      message = "this field is require";
+      isError = true;
+    }
+    else {
+      if(property.includes("number")) {
+        if(!value.match(/^[0-9]+$/)){
+          message = "this field is number";
+          isError = true;
+        } 
+      }
+      if(property.includes("email")) {
+        let lastAtPos = value.lastIndexOf('@');
+        let lastDotPos = value.lastIndexOf('.');
+
+        if (!(lastAtPos < lastDotPos && lastAtPos > 0 && value.indexOf('@@') == -1 && lastDotPos > 2 && (value.length - lastDotPos) > 2)) {
+          message = "this field is email";
+          isError = true;
+        }
+      }
+    }
+    return {error: isError, message};
+  };
+  const validateFields = [
+    {name: "fname", value: fname, property: []},
+    {name: "lname", value: lname, property: []},
+    {name: "preferredName", value: preferredName, property: []},
+    {name: "title", value: title, property: []},
+    {name: "dateOfBirth", value: dateOfBirth, property: []},
+    {name: "streetAddress", value: streetAddress, property: []},
+    {name: "suburb", value: suburb, property: []},
+    {name: "mobileNumber", value: mobileNumber, property: ["number"]},
+    {name: "emailAddress", value: emailAddress, property: ["email"]},
+    {name: "medicareNo", value: medicareNo, property: ["number"]},
+    {name: "lineNo", value: lineNo, property: ["number"]},
+    {name: "validNo", value: validNo, property: ["number"]},
+    {name: "healthCare", value: healthCare, property: ["number"]},
+    {name: "validTo", value: validTo, property: []},
+    {name: "emergencyContactName", value: emergencyContactName, property: ["number"]},
+    {name: "phoneNumber", value: phoneNumber, property: ["number"]},
+  ]
+  const validate = () => {
+    let res = true;
+    let errors = {};
+    // personalDetail
+    let tmp = {};
+    validateFields.forEach(( item, index) => {
+      tmp = checkValidate(item.value, item.property);
+      if(tmp.error) {
+        errors[item.name] = tmp.message;
+        res = false;
+      }
+    })
+    setErrors(errors);
+    return res;
+  };
   const onClickSubmit = () => {
-    
+    // NotificationManager.success("submit", "submit text", 1000);
+    if(!validate()) {
+      NotificationManager.warning("Please input all required fields!", "Error",  1000);
+      return;
+    }
+    let sendData = {};
+    sendData.gender = gender;
+    sendData.fname = fname;
+    sendData.lname = lname;
+    sendData.preferredName = preferredName;
+    sendData.title = title;
+    sendData.dateOfBirth = dateOfBirth;
+    sendData.streetAddress = streetAddress;
+    sendData.suburb = suburb;
+    sendData.mobileNumber = mobileNumber;
+    sendData.emailAddress = emailAddress;
+    sendData.medicareNo = medicareNo;
+    sendData.lineNo = lineNo;
+    sendData.validNo = validNo;
+    sendData.healthCare = healthCare;
+    sendData.validTo = validTo;
+    sendData.emergencyContactName = emergencyContactName;
+    sendData.phoneNumber = phoneNumber;
+    sendData.aboriginal = aboriginal;
+    sendData.torrensIslander = torrensIslander;
+    sendData.neither = neither;
+
+    console.log(sendData);
+    ApiService.post("", sendData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
   React.useEffect(() => {
-  }, []);
+    validate();
+  }, [fname, lname, preferredName, title, dateOfBirth,
+    streetAddress, suburb, mobileNumber, emailAddress,
+    medicareNo, lineNo, validNo, healthCare, validTo, emergencyContactName, phoneNumber, aboriginal, torrensIslander, neither
+  ]);
 
   return (
     <>
@@ -111,23 +213,26 @@ export default function Register() {
                       return <span className="step" key={index}>{value}</span>
                   })}
                   </div>
-                  <form id="regForm">
+                  <form id="regForm" autoComplete="off">
                     {widgetState == 1 &&
-                      <PersonalDetail 
+                      <PersonalDetail
                         changeInfo = {personalInfo}
                         data = {{gender, fname, lname, preferredName, title, dateOfBirth}}
+                        errors = {errors}
                       />
                     }
                     {widgetState == 2 &&
                       <AddressProfile 
                         changeInfo = {addressInfo}
                         data = {{streetAddress, suburb, mobileNumber, emailAddress}}
+                        errors = {errors}
                       />
                     }
                     {widgetState == 3 &&
                       <CreateAccount 
                         changeInfo = {accountInfo}
                         data = {{medicareNo, lineNo, validNo, healthCare, validTo, emergencyContactName, phoneNumber, aboriginal, torrensIslander, neither}}
+                        errors = {errors}
                       />
                     }
                     <div className="next-prev">

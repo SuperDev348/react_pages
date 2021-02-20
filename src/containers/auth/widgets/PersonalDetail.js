@@ -1,4 +1,5 @@
 import React from "react";
+import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch,useHistory } from "react-router-dom";
 import {Radio, 
@@ -8,8 +9,10 @@ import {Radio,
   TextField,
 } from "@material-ui/core"
 
+import Input from "../../../components/input"
+
 export default function PersonalDetail(props) {
-  const {data} = props;
+  const {data, errors} = props;
 
   const [gender, setGender] = React.useState("female");
   const [fname, setFname] = React.useState("");
@@ -46,33 +49,57 @@ export default function PersonalDetail(props) {
       <h3 className="fs-subtitle">Tell us something more about you</h3>
       <div className="left-side">
         <label>First Name</label>
-        <input type="text" name="fname" placeholder="Enter First Name" value={fname} 
+        <Input 
+          type={"text"} 
+          name={"fname"} 
+          placeholder={"Enter First Name"} 
+          value={fname}
           onChange={ (event) => setFname(event.target.value)}
+          error = {errors.fname}
         />
       </div>
       <div className="right-side">
         <label>Last Name</label>
-        <input type="text" name="lname" placeholder="Enter ast Name" value={lname} 
-          onChange={(event) => setLname(event.target.value)}
+        <Input 
+          type={"text"} 
+          name={"lname"} 
+          placeholder={"Enter ast Name"} 
+          value={lname}
+          onChange={ (event) => setLname(event.target.value)}
+          error = {errors.lname}
         />
       </div>
       <div className="left-side">
         <label>Preferred Name </label>
-        <input type="text" name="lname" placeholder="Enter Preferred Name" value={preferredName} 
-          onChange={(event) => setPreferredName(event.target.value)}
+        <Input 
+          type={"text"} 
+          name={"preferredName"} 
+          placeholder={"Enter First Name"} 
+          value={preferredName}
+          onChange={ (event) => setPreferredName(event.target.value)}
+          error = {errors.preferredName}
         />
       </div>
       <div className="right-side">
         <label>Title</label>
-        <input type="text" name="lname" placeholder="Enter Title" value={title} 
-          onChange={(event) => setTitle(event.target.value)}
+        <Input 
+          type={"text"} 
+          name={"title"} 
+          placeholder={"Enter First Name"} 
+          value={title}
+          onChange={ (event) => setTitle(event.target.value)}
+          error = {errors.title}
         />
       </div>
       <div className="left-side">
         <label>Date Of Birth</label>
-        <input type="text" name="lname" placeholder="Enter Date Of Birth" value={dateOfBirth} 
-          onChange={(event) => setDateOfBirth(event.target.value)}
+        <DatePicker
+          selected={ dateOfBirth }
+          onChange={ (date) => setDateOfBirth(date) }
+          name="Date of Birth"
+          dateFormat="MM/dd/yyyy"
         />
+        {errors.dateOfBirth ? <div style={{color: "red", fontSize: 12, paddingLeft: 12}}>{errors.dateOfBirth}</div> : <div style={{paddingBottom: 18}}> </div>} 
       </div>
       <div className="right-side">
         <label>Gender</label>

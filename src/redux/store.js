@@ -1,23 +1,34 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import createSagaMiddleware from 'redux-saga';
+// import { createStore, applyMiddleware, compose } from 'redux';
+// import thunk from 'redux-thunk';
+// import createSagaMiddleware from 'redux-saga';
 
-import rootReducer from './root-reducer';
-import rootSaga from './root-saga';
+// import rootReducer from './root-reducer';
+// import rootSaga from './root-saga';
 
-const sagaMiddleware = createSagaMiddleware();
-const middlewares = [thunk, sagaMiddleware];
+// const sagaMiddleware = createSagaMiddleware();
+// const middlewares = [thunk, sagaMiddleware];
 
-const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-      })
-    : compose;
+// const composeEnhancers =
+//   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+//         // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+//       })
+//     : compose;
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(...middlewares))
-);
-sagaMiddleware.run(rootSaga);
-export { store };
+// const store = createStore(
+//   rootReducer,
+//   composeEnhancers(applyMiddleware(...middlewares))
+// );
+// sagaMiddleware.run(rootSaga);
+// export { store };
+import { createStore, combineReducers } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form';
+
+const reducer = combineReducers({
+  form: reduxFormReducer, // mounted under "form"
+});
+const store = (window.devToolsExtension
+  ? window.devToolsExtension()(createStore)
+  : createStore)(reducer);
+
+export {store};

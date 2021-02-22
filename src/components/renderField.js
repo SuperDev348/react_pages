@@ -1,11 +1,11 @@
 import React from 'react';
 
-const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+const renderField = ({ input, placeholder, type, meta: { touched, error, warning } }) => (
   <div>
-    <input {...input} placeholder={label} type={type}/>
+    <input {...input} placeholder={placeholder} type={type}/>
     {touched ? 
-      ((error && <div style={{color: "red", fontSize: 12}}>{error}</div>) || 
-      (warning && <div style={{color: "yellow", fontSize: 12}}>{warning}</div>)) : <div style={{marginBottom: 18}}></div>}
+      ((error ? <div style={{color: "red", fontSize: 12}}>{error}</div> : <div style={{marginBottom: 18}}></div>) || 
+      (warning ? <div style={{color: "yellow", fontSize: 12}}>{warning}</div> : <div style={{marginBottom: 18}}></div>)) : <div style={{marginBottom: 18}}></div>}
   </div>
 );
 

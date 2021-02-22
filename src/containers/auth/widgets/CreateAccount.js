@@ -4,9 +4,57 @@ import { Field, reduxForm } from 'redux-form';
 import RenderDatePicker from '../../../components/renderDatePicker';
 import RenderField from '../../../components/renderField';
 
-export default function CreateAccount(props) {
+const checkValidate = (value, property = []) => {
+  let message= "";
+  let isError = false;
+  if(!value) {
+    message = "this field is require";
+    isError = true;
+  }
+  else {
+    if(property.includes("number")) {
+      if(!value.match(/^[0-9]+$/)){
+        message = "this field is number";
+        isError = true;
+      } 
+    }
+    if(property.includes("email")) {
+      let lastAtPos = value.lastIndexOf('@');
+      let lastDotPos = value.lastIndexOf('.');
+
+      if (!(lastAtPos < lastDotPos && lastAtPos > 0 && value.indexOf('@@') == -1 && lastDotPos > 2 && (value.length - lastDotPos) > 2)) {
+        message = "this field is email";
+        isError = true;
+      }
+    }
+  }
+  return {error: isError, message};
+};
+const validateFields = [
+  {name: "medicareNo", property: ["number"]},
+  {name: "lineNo", property: ["number"]},
+  {name: "validNo", property: ["number"]},
+  {name: "healthCare", property: ["number"]},
+  {name: "validTo", property: []},
+  {name: "emergencyContactName", property: []},
+  {name: "phoneNumber", property: ["number"]},
+]
+const validate = (values) => {
+  let errors = {};
+  let tmp = {};
+  validateFields.forEach(( item, index) => {
+    tmp = checkValidate(values[item.name], item.property);
+    if(tmp.error) {
+      errors[item.name] = tmp.message;
+    }
+  })
+  return errors;
+};
+const CreateAccount = (props) => {
+  const { handleSubmit, pristine, reset, submitting } = props;
+
   return (
-    <>
+    <form className="regForm" autoComplete="off" onSubmit={handleSubmit}>
       <h2 className="fs-title">Create your account</h2>
       <h3 className="fs-subtitle">Fill in your credentials</h3>
       <div className="row">
@@ -104,6 +152,15 @@ export default function CreateAccount(props) {
           <label htmlFor="neither">Neither</label>
         </div>
       </div>
-    </>
+      <div className="next-prev">
+        <button className="mr-2" type="button" id="prevBtn" onClick={props.onPrev}>Previous</button>
+        <button type="submit" id="nextBtn">Submit</button>
+      </div>
+    </form>
   );
 }
+
+export default reduxForm({
+  form: 'createAccount',
+  validate
+})(CreateAccount);

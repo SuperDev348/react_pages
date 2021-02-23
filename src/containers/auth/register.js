@@ -149,8 +149,7 @@ export default function Register() {
             <div className="row">
               <div className="col-md-12">
                 <div className="appointment-box">
-                  <div className="next-lable">Register New Patient</div>
-                  
+                  <div className="next-lable">Register New Patient</div>     
                   <div className="dot">
                   {states.map((value, index) => {
                     if(value == widgetState)

@@ -117,7 +117,7 @@ const PersonalDetail = (props) => {
     </form>
   );
 }
-
+      
 export default reduxForm({
   form: 'personalDetail',
   validate,

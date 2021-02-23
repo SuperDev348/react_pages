@@ -50,7 +50,7 @@ const AddressProfile = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
 
   return (
-    <form className="regForm" autoComplete="off" onSubmit={handleSubmit}>
+    <form className="regForm" autoComplete="off" onSubmit={handleSubmit}>     
       <h2 className="fs-title">Address Profiles</h2>
       <h3 className="fs-subtitle">Your presence on the Address</h3>
       <div className="left-side adres-fild">

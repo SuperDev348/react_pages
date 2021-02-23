@@ -39,7 +39,7 @@ const validateFields = [
   {name: "emergencyContactName", property: []},
   {name: "phoneNumber", property: ["number"]},
 ]
-const validate = (values) => {
+const validate = (values) => {      
   let errors = {};
   let tmp = {};
   validateFields.forEach(( item, index) => {

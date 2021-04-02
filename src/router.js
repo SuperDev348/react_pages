@@ -11,10 +11,11 @@ export default function Routes() {
     return (
       <Router basename={"/build"}>
           <Switch>
-            <Route path="/register">
+            <Route path="/">
               <Register/>
             </Route>
           </Switch>
       </Router>
     );
 }
+           

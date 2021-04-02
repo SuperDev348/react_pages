@@ -6,6 +6,6 @@ const renderDatePicker = ({input, placeholder, defaultValue, meta: {touched, err
     <DatePicker {...input} dateForm="MM/DD/YYYY" selected={input.value ? input.value : null} />
     {touched && error ? <div style={{color: "red", fontSize: 12}}>{error}</div> : <div style={{marginBottom: 18}}></div>}
   </div>
-);        
+);
 
 export default renderDatePicker

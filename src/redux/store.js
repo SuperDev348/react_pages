@@ -20,7 +20,7 @@
 //   composeEnhancers(applyMiddleware(...middlewares))
 // );
 // sagaMiddleware.run(rootSaga);
-// export { store };
+// export { store };     
 import { createStore, combineReducers } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
 

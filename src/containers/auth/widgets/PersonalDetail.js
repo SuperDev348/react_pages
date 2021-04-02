@@ -114,7 +114,7 @@ const PersonalDetail = (props) => {
       <div className="next-prev">
         <button type="submit" id="nextBtn">Next</button>
       </div>
-    </form>
+    </form>     
   );
 }
 

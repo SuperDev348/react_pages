@@ -9,4 +9,4 @@ const renderField = ({ input, placeholder, type, meta: { touched, error, warning
   </div>
 );
 
-export default renderField   
+export default renderField

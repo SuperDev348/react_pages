@@ -140,7 +140,7 @@ export default function Register() {
     setStyleAccount(styleAccount);
   }, [widgetState]);
 
-  return (
+  return (      
     <>
       <Header />
       <div className="dashboard-saction">

@@ -58,7 +58,7 @@ const validate = (values) => {
     if(tmp.error) {
       errors[item.name] = tmp.message;
     }
-  })
+  })      
   return errors;
 };
 const RegisterForm = (props) => {

@@ -52,7 +52,7 @@ const AddressProfile = (props) => {
   return (
     <form className="regForm" autoComplete="off" onSubmit={handleSubmit}>
       <h2 className="fs-title">Address Profiles</h2>
-      <h3 className="fs-subtitle">Your presence on the Address</h3>
+      <h3 className="fs-subtitle">Your presence on the Address</h3>     
       <div className="left-side adres-fild">
         <label>Street Address</label>
         <Field 

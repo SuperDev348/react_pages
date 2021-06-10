@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-
+    
 import RenderDatePicker from '../../components/renderDatePicker';
 import PersonalDetail from './widgets/PersonalDetail'
 import AddressProfile from "./widgets/AddressProfile";

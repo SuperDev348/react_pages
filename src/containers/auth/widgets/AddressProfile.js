@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from 'redux-form';
-
+    
 import RenderField from '../../../components/renderField';
 
 const checkValidate = (value, property = []) => {
